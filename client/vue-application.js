@@ -1,7 +1,7 @@
-const HelloOtherWorld = window.httpVueLoader("./components/HelloOtherWorld.vue");
+const Home = window.httpVueLoader("./components/Home.vue");
 
 var app = new Vue({
 	el: "#app",
 	data: {},
-	components: { HelloOtherWorld },
+	components: { Home },
 });
