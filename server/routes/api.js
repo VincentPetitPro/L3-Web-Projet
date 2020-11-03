@@ -1,13 +1,16 @@
 const express = require("express");
 const router = express.Router();
-
 const bcrypt = require("bcrypt");
 const { Client } = require("pg");
+const config = require("../../config.json");
+
 const client = new Client({
-	user: "postgres",
-	host: "localhost",
-	password: "Mollossesdu924!",
-	database: "Projet",
+
+	user: config.user,
+	host: config.host,
+	password: config.password,
+	database: config.database,
+
 });
 client.connect();
 
