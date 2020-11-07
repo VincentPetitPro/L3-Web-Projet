@@ -20,7 +20,7 @@ router.post("/login", async(req, res)=> {
 	
 	const profil = await client.query({
 		text: 'SELECT * FROM users WHERE mail =$1',
-		values:[mail]
+		values:[email]
 	})
 	
 	if (profil.row.length === 0) {
@@ -51,9 +51,29 @@ router.post("/logout", function (req, res, next) {
 	res.send({ message: "Not implemented" });
 });
 
-router.post("/register", function (req, res, next) {
-	res.status(500);
-	res.send({ message: "Not implemented" });
+router.post("/register", async (req, res) => {
+	const email = req.body.mail
+	const password = req.body.password
+	const profil = await client.query({
+		text: 'SELECT * FROM users WHERE mail =$1',
+		values:[email]
+	})
+
+	if (profil.rows.length > 0) {
+		res.status(401).json({
+			message:" utilisateur déjà existant"
+		})
+		return
+	}
+
+	const hash = await bcrypt.hash(password, 10)
+	
+	await client.query({
+		text: 'INSERT INTO users(email,password) VALUES($1, $2)',
+		values:[email,hash]
+	})
+	res.send('ok')
+
 });
 
 module.exports = router;
