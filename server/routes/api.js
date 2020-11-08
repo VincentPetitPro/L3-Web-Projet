@@ -46,11 +46,6 @@ router.post("/login", async(req, res)=> {
 	}
 });
 
-router.post("/logout", function (req, res, next) {
-	res.status(500);
-	res.send({ message: "Not implemented" });
-});
-
 router.post("/register", async (req, res) => {
 	const email = req.body.mail
 	const password = req.body.password
