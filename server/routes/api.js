@@ -14,6 +14,8 @@ const client = new Client({
 });
 client.connect();
 
+
+//connexion au profil
 router.post("/login", async(req, res)=> {
 	const email = req.body.mail
 	const password = req.body.password
@@ -46,6 +48,7 @@ router.post("/login", async(req, res)=> {
 	}
 });
 
+//création du profil
 router.post("/register", async (req, res) => {
 	const email = req.body.mail
 	const password = req.body.password
@@ -71,4 +74,45 @@ router.post("/register", async (req, res) => {
 
 });
 
-module.exports = router;
+router.get('/me', async (req, res) => {
+	if (typeof req.session.userId === 'undefined') {
+		res.status(401).json({ message: 'not connected' })
+		return
+	}
+	
+	const result = await client.query({ text: 'SELECT id, mail FROM users WHERE id=$1', values: [req.session.userId] })
+	
+	res.json(result.row[0])
+});
+
+router.post('/article', async (req, res) => {
+	const name = req.body.name
+	const content = req.body.content
+	const image = req.body.img 
+	const author = req.body.author
+
+	if (typeof name !== 'string' || name === '' ||
+			typeof content !== 'string' || content === '' ||
+			typeof image !== 'string' || content === '' ||
+			typeof author !== 'string' || content === '') {
+		res.status(400).json({ message: 'bad request' })
+		return
+	}
+
+	const result = await client.query({
+		text: 'INSERT INTO articles(name, content, image, author) VALUES ($1, $2, $3, $4) RETURNING *',
+		values: [name, content, image, author]
+	})
+	const id = result.rows[0].id
+	
+	res.json({
+		id: id,
+		name: name,
+		content: content,
+		image: image,
+		author: author
+	})
+	
+})
+
+module.exports = router
