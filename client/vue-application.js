@@ -20,3 +20,8 @@ var app = new Vue({
 	data: {},
 	components: { Home, Custom, Register, Login },
 });
+
+function changeColor(inputId, fondId) {
+	let color = document.getElementById(inputId).value;
+	document.getElementById(fondId).style.fill = color;
+}
