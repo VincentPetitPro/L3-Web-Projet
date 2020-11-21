@@ -12,9 +12,9 @@
 	<body>
 		<div id="app">
 			<div style="display: grid">
-				<home></home>
+				<router-view></router-view>
 				<header>
-					<ul>
+					<ul id="navbar">
 						<li>
 							<router-link to="/"><h2>Accueil</h2></router-link>
 						</li>
@@ -22,7 +22,7 @@
 							<router-link to="/articles"><h2>Articles</h2></router-link>
 						</li>
 						<li>
-							<router-link to="custom"><h2>Custom Ta Board</h2></router-link>
+							<router-link to="/custom"><h2>Custom Ta Board</h2></router-link>
 						</li>
 						<li>
 							<router-link to="/register"><h2>S'inscrire</h2></router-link>
@@ -47,7 +47,7 @@
 		background-color: rgba(0, 0, 0, 0.8);
 		position: absolute;
 	}
-	ul {
+	#navbar {
 		height: 100%;
 		padding-right: 40px;
 		display: flex;
