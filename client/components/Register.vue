@@ -2,7 +2,7 @@
 	<div id="page">
 		<div id="body">
 			<div id="container">
-				<form id="register" method="post" @submit="register()">
+				<form id="register" method="post" @submit="register">
 					<h3>Sign In</h3>
 					<p>
 						<label for="mail">mail</label>
@@ -58,14 +58,12 @@ module.exports = {
 		};
 	},
 	methods: {
-		methods: {
-			async register() {
-				await axios.post("/api/register", {
-					mail: this.mail,
-					password: this.password,
-				});
-				this.$router.push("/");
-			},
+		async register() {
+			await axios.post("/api/register", {
+				mail: this.mail,
+				password: this.password,
+			});
+			this.$router.push("/");
 		},
 	},
 };
