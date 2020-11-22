@@ -17,22 +17,27 @@ const router = new VueRouter({
 var app = new Vue({
 	router,
 	el: "#app",
-	data: {},
-	components: { Home, Custom, Register, Login },
-	methods: {
-		async register(data) {
-			await axios
-				.post("/register", data)
-				.then((response) => {
-					router.replace({
-						name: "home",
-					});
-				})
-				.catch((error) => {
-					console.log(error);
-				});
-		},
+	data: {
+		user: {},
+		isConnected: false,
 	},
+	components: { Home, Custom, Register, Login },
+	async mounted() {
+		const res = await axios.get("/api/articles");
+		this.articles = res.data;
+		try {
+			const res3 = await axios.get("/api/me");
+			this.user = res3.data;
+			this.isConnected = true;
+		} catch (err) {
+			if (err.response?.status === 401) {
+				this.isConnected = false;
+			} else {
+				console.log("error", err);
+			}
+		}
+	},
+	methods: {},
 });
 
 function changeColor(inputId, fondId) {

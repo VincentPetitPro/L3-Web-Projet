@@ -14,12 +14,12 @@ client.connect();
 
 //connexion au profil
 router.post("/login", async (req, res) => {
-	const email = req.body.mail;
+	const mail = req.body.mail;
 	const password = req.body.password;
 
 	const profil = await client.query({
 		text: "SELECT * FROM users WHERE mail =$1",
-		values: [email],
+		values: [mail],
 	});
 
 	if (profil.row.length === 0) {
@@ -35,7 +35,7 @@ router.post("/login", async (req, res) => {
 		req.session.userId = user.id;
 		res.json({
 			id: user.id,
-			email: user.mail,
+			mail: user.mail,
 		});
 	} else {
 		res.status(401).json({
@@ -47,11 +47,11 @@ router.post("/login", async (req, res) => {
 
 //création du profil
 router.post("/register", async (req, res) => {
-	const email = req.body.mail;
+	const mail = req.body.mail;
 	const password = req.body.password;
 	const username = req.body.username;
 
-	const profil = await client.query("SELECT * FROM users WHERE mail =$1", [email]);
+	const profil = await client.query("SELECT * FROM users WHERE mail =$1", [mail]);
 
 	if (profil.rows.length > 0) {
 		res.status(401).json({
@@ -62,26 +62,17 @@ router.post("/register", async (req, res) => {
 
 	const hash = await bcrypt.hash(password, 10);
 
-	await client.query("INSERT INTO users(email,password,username) VALUES($1, $2, $3)", [
-		email,
+	await client.query("INSERT INTO users(mail,password,username) VALUES($1, $2, $3)", [
+		mail,
 		hash,
 		username,
 	]);
 	res.send("ok");
 
 	const user = {
-		email: email,
+		mail: mail,
 		username: username,
 	};
-
-	if (actual_user.length > 0) {
-		while (actual_user.length != 0) {
-			actual_user.splice(0, 1);
-		}
-		actual_user.push(user);
-	} else {
-		actual_user.push(user);
-	}
 	res.status(200).json({ message: "Votre inscription a été pris en compte" });
 });
 

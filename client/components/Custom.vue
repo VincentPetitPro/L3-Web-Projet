@@ -272,7 +272,6 @@ module.exports = {
 
 <style scoped>
 #page {
-	margin-top: 60px;
 	margin-left: 0;
 	margin-right: 0;
 	margin-bottom: 0;
@@ -284,6 +283,7 @@ module.exports = {
 }
 
 .colorBar {
+	margin-top: 80px;
 	display: flex;
 	justify-content: center;
 }
@@ -301,7 +301,7 @@ module.exports = {
 #container {
 	width: 100vw;
 	height: 100vh;
-	padding-top: 20vh;
+	padding-top: 25vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;

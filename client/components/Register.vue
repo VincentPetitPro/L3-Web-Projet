@@ -2,16 +2,17 @@
 	<div id="page">
 		<div id="body">
 			<div id="container">
-				<form id="register" action="/register" method="post" @submit="register()">
+				<form id="register" method="post" @submit="register()">
 					<h3>Sign In</h3>
 					<p>
-						<label for="email">Email</label>
+						<label for="mail">mail</label>
 						<input
-							type="email"
-							v-model="email.input"
-							name="email"
+							type="mail"
+							v-model="mail.input"
+							name="mail"
 							placeholder="john.appleseed@apple.com"
 							class="form-input"
+							required
 						/>
 					</p>
 					<p>
@@ -22,6 +23,7 @@
 							name="username"
 							placeholder="john92x"
 							class="form-input"
+							required
 						/>
 					</p>
 					<p>
@@ -33,6 +35,7 @@
 							placeholder="••••••••••"
 							class="form-input"
 							minlength="8"
+							required
 						/>
 					</p>
 					<p><button type="submit">S'inscrire</button></p>
@@ -46,18 +49,20 @@
 module.exports = {
 	data: function () {
 		return {
-			email: { input: "" },
+			mail: { input: "" },
 			username: { input: "" },
 			password: { input: "" },
 		};
 	},
 	methods: {
-		register() {
-			this.$emit("register", {
-				email: this.email.input,
-				password: this.password.input,
-				username: this.username.input,
-			});
+		methods: {
+			async createUser() {
+				await axios.post("/api/register", {
+					mail: this.mail,
+					password: this.password,
+				});
+				this.$router.push("/");
+			},
 		},
 	},
 };

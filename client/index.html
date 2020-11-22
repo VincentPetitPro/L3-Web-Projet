@@ -12,27 +12,26 @@
 	</head>
 	<body>
 		<div id="app">
-			<div style="display: grid">
-				<main>
-					<router-view @register="register"></router-view>
-					<header>
-						<ul id="navbar">
-							<li>
-								<router-link to="/"><h2>Accueil</h2></router-link>
-							</li>
-							<li>
-								<router-link to="/articles"><h2>Articles</h2></router-link>
-							</li>
-							<li>
-								<router-link to="/custom"><h2>Custom Ta Paire</h2></router-link>
-							</li>
-							<li>
-								<router-link to="/register"><h2>S'inscrire</h2></router-link>
-							</li>
-						</ul>
-					</header>
-				</main>
-			</div>
+			<main style="display: grid">
+				<router-view :user="user" :is-connected="isConnected" @register="register"></router-view>
+				<header>
+					<ul id="navbar">
+						<li>
+							<router-link to="/"><h2>Accueil</h2></router-link>
+						</li>
+						<li>
+							<router-link to="/articles"><h2>Articles</h2></router-link>
+						</li>
+						<li>
+							<router-link to="/custom"><h2>Custom Ta Paire</h2></router-link>
+						</li>
+						<li>
+							<div v-if="isConnected">{user.username}</div>
+							<router-link to="/register"><h2>S'inscrire</h2></router-link>
+						</li>
+					</ul>
+				</header>
+			</main>
 		</div>
 		<script src="/vue-application.js"></script>
 	</body>
