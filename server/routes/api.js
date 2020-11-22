@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const { Client } = require("pg");
+const axios = require("axios");
 const config = require("../../config.json");
 
 const client = new Client({
