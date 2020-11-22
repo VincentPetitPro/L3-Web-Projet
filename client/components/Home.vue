@@ -1,6 +1,11 @@
 <template>
 	<div id="home-bg">
 		<div class="container">
+			<p>
+				Bienvenue sur Ollie Mag ! Le seul site du monde sur la culture de la planche à roulette!
+			</p>
+		</div>
+		<div class="container">
 			<h2>Dernier article :</h2>
 			<h3>{{ article.titre }}</h3>
 			<img v-bind:src="article.img" />
@@ -36,6 +41,7 @@ module.exports = {
 	background-repeat: no-repeat;
 	background-size: cover;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
