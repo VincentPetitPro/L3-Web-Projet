@@ -8,6 +8,7 @@
 						<label for="mail">mail</label>
 						<input
 							type="mail"
+							id="mail"
 							v-model="mail.input"
 							name="mail"
 							placeholder="john.appleseed@apple.com"
@@ -19,6 +20,7 @@
 						<label for="username">Nom d'utilisateur</label>
 						<input
 							type="text"
+							id="username"
 							v-model="username.input"
 							name="username"
 							placeholder="john92x"
@@ -30,6 +32,7 @@
 						<label for="password">Mot de passe</label>
 						<input
 							type="password"
+							id="password"
 							v-model="password.input"
 							name="password"
 							placeholder="••••••••••"
