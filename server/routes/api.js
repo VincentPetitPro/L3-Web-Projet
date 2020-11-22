@@ -126,4 +126,62 @@ router.post("/article", async (req, res) => {
 	});
 });
 
+router.get("/articles", async (res) => {
+	const result = await client.query({
+		text: "SELECT * FROM articles",
+	});
+	res.json(result.rows);
+});
+
+async function choix_article(req, res, next) {
+	const id = parseInt(req.params.id);
+
+	if (isNaN(id)) {
+		res.status(400).json({ message: "id devrait être un nombre" });
+	}
+
+	req.id = id;
+
+	const result = await client.query({
+		text: "SELECT * FROM articles WHERE id=$1",
+		values: [id],
+	});
+
+	if (!result.rows.length) {
+		res.status(404).json({ message: "article" + id + "nexiste pas" });
+		return;
+	}
+
+	req.article = result.rows[0];
+	next();
+}
+
+router
+	.route("/article/:articleId")
+
+	.get(choix_article, (req, res) => {
+		res.json(req.article);
+	})
+
+	.put(choix_article, async (req, res) => {
+		const title = req.body.title;
+		const content = req.body.content;
+		const img = req.body.img;
+		const author = req.body.author;
+
+		await client.query({
+			text: "UPDATE articles SET title=$1, SET content=$2, SET img=$3, SET author=$4, WHERE id=$5",
+			values: [title, content, img, author, req.id],
+		});
+		res.send();
+	})
+
+	.delete(choix_article, async (req, res) => {
+		await client.query({
+			text: "DELETE FROM articles WHERE id=$1",
+			values: [req.id],
+		});
+		res.send();
+	});
+
 module.exports = router;
