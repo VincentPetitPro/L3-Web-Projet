@@ -2,13 +2,13 @@
 	<div id="page">
 		<div id="body">
 			<div id="container">
-				<form id="register" action="/register" method="post" @submit="checkForm">
+				<form id="register" action="/register" method="post" @submit="register()">
 					<h3>Sign In</h3>
 					<p>
 						<label for="email">Email</label>
 						<input
 							type="email"
-							v-model="email"
+							v-model="email.input"
 							name="email"
 							placeholder="john.appleseed@apple.com"
 							class="form-input"
@@ -18,7 +18,7 @@
 						<label for="password">Mot de passe</label>
 						<input
 							type="password"
-							v-model="password"
+							v-model="password.input"
 							name="password"
 							placeholder="••••••••••"
 							class="form-input"
@@ -36,18 +36,13 @@
 module.exports = {
 	data: function () {
 		return {
-			email: { input: "", invalid: false },
+			email: { input: "" },
 			password: { input: "" },
 		};
 	},
 	methods: {
 		register() {
-			this.email.invalid = !this.email.input.match(
-				/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-			);
-			if (!this.email.invalid) {
-				this.$emit("register", { email: this.email.input, password: this.password.input });
-			}
+			this.$emit("register", { email: this.email.input, password: this.password.input });
 		},
 	},
 };
@@ -78,7 +73,7 @@ module.exports = {
 
 #container {
 	background-color: rgb(36, 36, 36);
-	border: 3px solid blue;
+	border: 3px solid #f3ff85;
 	border-radius: 15px;
 }
 
