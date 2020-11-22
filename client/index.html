@@ -7,28 +7,31 @@
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/http-vue-loader/src/httpVueLoader.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
 	</head>
 	<body>
 		<div id="app">
 			<div style="display: grid">
-				<router-view></router-view>
-				<header>
-					<ul id="navbar">
-						<li>
-							<router-link to="/"><h2>Accueil</h2></router-link>
-						</li>
-						<li>
-							<router-link to="/articles"><h2>Articles</h2></router-link>
-						</li>
-						<li>
-							<router-link to="/custom"><h2>Custom Ta Paire</h2></router-link>
-						</li>
-						<li>
-							<router-link to="/register"><h2>S'inscrire</h2></router-link>
-						</li>
-					</ul>
-				</header>
+				<main>
+					<router-view @register="register"></router-view>
+					<header>
+						<ul id="navbar">
+							<li>
+								<router-link to="/"><h2>Accueil</h2></router-link>
+							</li>
+							<li>
+								<router-link to="/articles"><h2>Articles</h2></router-link>
+							</li>
+							<li>
+								<router-link to="/custom"><h2>Custom Ta Paire</h2></router-link>
+							</li>
+							<li>
+								<router-link to="/register"><h2>S'inscrire</h2></router-link>
+							</li>
+						</ul>
+					</header>
+				</main>
 			</div>
 		</div>
 		<script src="/vue-application.js"></script>

@@ -15,6 +15,16 @@
 						/>
 					</p>
 					<p>
+						<label for="username">Nom d'utilisateur</label>
+						<input
+							type="text"
+							v-model="username.input"
+							name="username"
+							placeholder="john92x"
+							class="form-input"
+						/>
+					</p>
+					<p>
 						<label for="password">Mot de passe</label>
 						<input
 							type="password"
@@ -37,12 +47,17 @@ module.exports = {
 	data: function () {
 		return {
 			email: { input: "" },
+			username: { input: "" },
 			password: { input: "" },
 		};
 	},
 	methods: {
 		register() {
-			this.$emit("register", { email: this.email.input, password: this.password.input });
+			this.$emit("register", {
+				email: this.email.input,
+				password: this.password.input,
+				username: this.username.input,
+			});
 		},
 	},
 };

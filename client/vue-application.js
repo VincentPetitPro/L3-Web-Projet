@@ -19,6 +19,20 @@ var app = new Vue({
 	el: "#app",
 	data: {},
 	components: { Home, Custom, Register, Login },
+	methods: {
+		async register(data) {
+			await axios
+				.post("/register", data)
+				.then((response) => {
+					router.replace({
+						name: "home",
+					});
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+	},
 });
 
 function changeColor(inputId, fondId) {
