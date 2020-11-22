@@ -52,6 +52,9 @@ router.post("/login", async(req, res)=> {
 router.post("/register", async (req, res) => {
 	const email = req.body.mail
 	const password = req.body.password
+	const username = req.body.username
+
+
 	const profil = await client.query({
 		text: 'SELECT * FROM users WHERE mail =$1',
 		values:[email]
@@ -65,12 +68,31 @@ router.post("/register", async (req, res) => {
 	}
 
 	const hash = await bcrypt.hash(password, 10)
+
 	
 	await client.query({
-		text: 'INSERT INTO users(email,password) VALUES($1, $2)',
-		values:[email,hash]
+		text: 'INSERT INTO users(email,password,username) VALUES($1, $2, $3)',
+		values:[email,hash,username]
 	})
 	res.send('ok')
+
+	const user = {
+    	email: email,
+    	username: username
+	}
+	
+	if (actual_user.length > 0)
+	{
+		while (actual_user.length != 0)
+		{
+			actual_user.splice(0, 1)
+    	}
+		actual_user.push(user)
+  	}
+  	else{
+   	 	actual_user.push(user)
+  	}
+  res.status(200).json({message: 'Votre inscription a été pris en compte'})
 
 });
 
