@@ -59,7 +59,7 @@ module.exports = {
 	},
 	methods: {
 		methods: {
-			async createUser() {
+			async register() {
 				await axios.post("/api/register", {
 					mail: this.mail,
 					password: this.password,
