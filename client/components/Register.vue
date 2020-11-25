@@ -2,14 +2,14 @@
 	<div id="page">
 		<div id="body">
 			<div id="container">
-				<form id="register" method="post" @submit="register">
+				<form id="register">
 					<h3>Sign In</h3>
 					<p>
-						<label for="mail">mail</label>
+						<label for="mail">Mail</label>
 						<input
 							type="mail"
 							id="mail"
-							v-model="mail.input"
+							v-model="mail"
 							name="mail"
 							placeholder="john.appleseed@apple.com"
 							class="form-input"
@@ -21,7 +21,7 @@
 						<input
 							type="text"
 							id="username"
-							v-model="username.input"
+							v-model="username"
 							name="username"
 							placeholder="john92x"
 							class="form-input"
@@ -33,7 +33,7 @@
 						<input
 							type="password"
 							id="password"
-							v-model="password.input"
+							v-model="password"
 							name="password"
 							placeholder="••••••••••"
 							class="form-input"
@@ -41,7 +41,7 @@
 							required
 						/>
 					</p>
-					<p><button type="submit">S'inscrire</button></p>
+					<p><button type="button" v-on:click="register">S'inscrire</button></p>
 				</form>
 			</div>
 		</div>
@@ -52,18 +52,18 @@
 module.exports = {
 	data: function () {
 		return {
-			mail: { input: "" },
-			username: { input: "" },
-			password: { input: "" },
+			mail: "",
+			username: "",
+			password: "",
 		};
 	},
 	methods: {
-		async register() {
-			await axios.post("/api/register", {
+		register: function (e) {
+			this.$emit("register", {
 				mail: this.mail,
 				password: this.password,
+				username: this.username,
 			});
-			this.$router.push("/");
 		},
 	},
 };

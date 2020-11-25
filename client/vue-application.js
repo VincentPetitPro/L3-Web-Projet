@@ -22,22 +22,19 @@ var app = new Vue({
 		isConnected: false,
 	},
 	components: { Home, Custom, Register, Login },
-	async mounted() {
-		const res = await axios.get("/api/articles");
-		this.articles = res.data;
-		try {
-			const res3 = await axios.get("/api/me");
-			this.user = res3.data;
-			this.isConnected = true;
-		} catch (err) {
-			if (err.response?.status === 401) {
-				this.isConnected = false;
-			} else {
-				console.log("error", err);
+	methods: {
+		async register(data) {
+			try {
+				await axios.post("api/register", {
+					mail: data.mail,
+					password: data.password,
+					username: data.username,
+				});
+			} catch (error) {
+				console.info("Error vue-app: " + error.config);
 			}
-		}
+		},
 	},
-	methods: {},
 });
 
 function changeColor(inputId, fondId) {

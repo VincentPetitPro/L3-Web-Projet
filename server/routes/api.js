@@ -52,7 +52,15 @@ router.post("/register", async (req, res) => {
 	const password = req.body.password;
 	const username = req.body.username;
 
-	const profil = await client.query("SELECT * FROM users WHERE mail =$1", [mail]);
+	const profil = await client.query("SELECT * FROM users WHERE mail =$1", [mail], (err, res) => {
+		if (err) {
+			console.log("Err:" + err);
+			throw err;
+		}
+		console.log("Res:" + res.body);
+	});
+
+	console.log("profil = " + profil);
 
 	if (profil.rows.length > 0) {
 		res.status(401).json({
@@ -60,7 +68,6 @@ router.post("/register", async (req, res) => {
 		});
 		return;
 	}
-
 	const hash = await bcrypt.hash(password, 10);
 
 	await client.query("INSERT INTO users(mail,password,username) VALUES($1, $2, $3)", [
@@ -130,7 +137,7 @@ router.get("/articles", async (res) => {
 	const result = await client.query({
 		text: "SELECT * FROM articles",
 	});
-	res.json(result.rows);
+	//res.json(result.rows);
 });
 
 async function choix_article(req, res, next) {

@@ -2,3 +2,4 @@ node_modules/
 *.pdf
 Prototype/
 config.json
+.vscode/
