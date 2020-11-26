@@ -130,7 +130,7 @@ router.get("/articles", async (res) => {
 	const result = await client.query({
 		text: "SELECT * FROM articles",
 	});
-	//res.json(result.rows);
+	res.json(result.rows);
 });
 
 async function choix_article(req, res, next) {
