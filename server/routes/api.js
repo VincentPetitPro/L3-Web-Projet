@@ -52,15 +52,7 @@ router.post("/register", async (req, res) => {
 	const password = req.body.password;
 	const username = req.body.username;
 
-	const profil = await client.query("SELECT * FROM users WHERE mail =$1", [mail], (err, res) => {
-		if (err) {
-			console.log("Err:" + err);
-			throw err;
-		}
-		console.log("Res:" + res.body);
-	});
-
-	console.log("profil = " + profil);
+	const profil = await client.query({ text: `SELECT * FROM users WHERE mail =$1`, values: [mail] });
 
 	if (profil.rows.length > 0) {
 		res.status(401).json({
