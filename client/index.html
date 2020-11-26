@@ -28,7 +28,7 @@
 						</li>
 						<li>
 							<div v-if="isConnected">{user.username}</div>
-							<router-link to="/register"><h2>S'inscrire</h2></router-link>
+							<router-link v-else to="/register"><h2>S'inscrire</h2></router-link>
 						</li>
 					</ul>
 				</header>

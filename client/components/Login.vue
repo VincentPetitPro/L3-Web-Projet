@@ -1,4 +1,6 @@
-<template></template>
+<template>
+	<p>this is login</p>
+</template>
 
 <script>
 module.exports = {
