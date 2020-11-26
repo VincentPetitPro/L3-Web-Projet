@@ -14,21 +14,31 @@
 	<body>
 		<div id="app">
 			<main style="display: grid">
-				<router-view :user="user" :is-connected="isConnected" @register="register"></router-view>
+				<router-view
+					:user="user"
+					:is-connected="isConnected"
+					@register="register"
+					@login="login"
+				></router-view>
 				<header>
 					<ul id="navbar">
 						<li>
-							<router-link to="/"><h2>Accueil</h2></router-link>
+							<router-link to="/" class="nav-item"><h2>Accueil</h2></router-link>
 						</li>
 						<li>
-							<router-link to="/articles"><h2>Articles</h2></router-link>
+							<router-link to="/articles" class="nav-item"><h2>Articles</h2></router-link>
 						</li>
 						<li>
-							<router-link to="/custom"><h2>Custom Ta Paire</h2></router-link>
+							<router-link to="/custom" class="nav-item"><h2>Custom Ta Paire</h2></router-link>
 						</li>
 						<li>
-							<div v-if="isConnected">{user.username}</div>
-							<router-link v-else to="/register"><h2>S'inscrire</h2></router-link>
+							<div v-if="isConnected" class="nav-item"><h2>{user.username}</h2></div>
+							<router-link v-if="!isConnected" to="/register" class="nav-item"
+								><h2>S'inscrire</h2></router-link
+							>
+						</li>
+						<li v-if="!isConnected">
+							<router-link to="/login" class="nav-item"><h2>Se Connecter</h2></router-link>
 						</li>
 					</ul>
 				</header>
@@ -59,7 +69,7 @@
 		list-style: none;
 		margin: 0;
 	}
-	a {
+	.nav-item {
 		color: #f3ff85;
 		text-decoration: none;
 	}

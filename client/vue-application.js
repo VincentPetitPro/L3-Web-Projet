@@ -29,7 +29,6 @@ var app = new Vue({
 					.post("api/register", {
 						mail: data.mail,
 						password: data.password,
-						username: data.username,
 					})
 					.then((res) => {
 						alert("Code " + res.status + " : Votre compte a été créé.");
@@ -41,6 +40,26 @@ var app = new Vue({
 						" : Votre compte n'a pas été créé, l'adresse mail étant déjà prise."
 				);
 			}
+			router.push("/login");
+		},
+		async login(data) {
+			await axios
+				.post("api/login", {
+					mail: data.mail,
+					password: data.password,
+				})
+				.then((res) => {
+					if (res.status == 200) {
+						alert("Code " + res.status + " : Vous êtes bien connecté");
+						this.isConnected = true;
+						this.user = { username: res.username, mail: res.mail, id: res.id };
+					} else if (res.status == 401) {
+						alert("Code " + err.response.status + " : Erreur :" + res.message);
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 		},
 	},
 });
