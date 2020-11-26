@@ -3,7 +3,7 @@
 		<div id="body">
 			<div id="container">
 				<form id="register">
-					<h3>Sign In</h3>
+					<h3>Sign Up</h3>
 					<p>
 						<label for="mail">Mail</label>
 						<input
@@ -37,7 +37,6 @@
 							name="password"
 							placeholder="••••••••••"
 							class="form-input"
-							minlength="8"
 							required
 						/>
 					</p>

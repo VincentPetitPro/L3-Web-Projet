@@ -23,7 +23,7 @@ router.post("/login", async (req, res) => {
 		values: [mail],
 	});
 
-	if (profil.row.length === 0) {
+	if (profil.rows.length === 0) {
 		res.status(401).json({
 			message: "Cet utilisateur n'existe pas",
 		});
@@ -38,6 +38,7 @@ router.post("/login", async (req, res) => {
 			id: user.id,
 			username: user.username,
 			mail: user.mail,
+			username: user.username,
 		});
 	} else {
 		res.status(401).json({
