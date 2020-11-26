@@ -36,6 +36,7 @@ router.post("/login", async (req, res) => {
 		req.session.userId = user.id;
 		res.json({
 			id: user.id,
+			username: user.username,
 			mail: user.mail,
 		});
 	} else {
