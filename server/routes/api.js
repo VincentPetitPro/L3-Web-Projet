@@ -127,7 +127,7 @@ router.post("/article", async (req, res) => {
 	});
 });
 
-router.get("/articles", async (res) => {
+router.get("/articles", async (req, res) => {
 	const result = await client.query({
 		text: "SELECT * FROM articles",
 	});
