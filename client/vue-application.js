@@ -52,7 +52,8 @@ var app = new Vue({
 					if (res.status == 200) {
 						alert("Code " + res.status + " : Vous êtes bien connecté");
 						this.isConnected = true;
-						this.user = { username: res.username, mail: res.mail, id: res.id };
+						this.user = { username: res.body.username, mail: res.body.mail, id: res.body.id };
+						router.push("/");
 					} else if (res.status == 401) {
 						alert("Code " + err.response.status + " : Erreur :" + res.message);
 					}
