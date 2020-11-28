@@ -2,12 +2,14 @@ const Home = window.httpVueLoader("./components/Home.vue");
 const Custom = window.httpVueLoader("./components/Custom.vue");
 const Register = window.httpVueLoader("./components/Register.vue");
 const Login = window.httpVueLoader("./components/Login.vue");
+const Articles = window.httpVueLoader("./components/Articles.vue");
 
 const routes = [
 	{ path: "/", component: Home },
 	{ path: "/register", component: Register },
 	{ path: "/custom", component: Custom },
 	{ path: "/login", component: Login },
+	{ path: "/articles", component: Articles },
 ];
 
 const router = new VueRouter({
@@ -21,7 +23,7 @@ var app = new Vue({
 		user: {},
 		isConnected: false,
 	},
-	components: { Home, Custom, Register, Login },
+	components: { Home, Custom, Register, Login, Articles },
 	methods: {
 		async register(data) {
 			try {
@@ -52,7 +54,7 @@ var app = new Vue({
 					if (res.status == 200) {
 						alert("Code " + res.status + " : Vous êtes bien connecté");
 						this.isConnected = true;
-						this.user = { username: res.body.username, mail: res.body.mail, id: res.body.id };
+						this.user = { username: res.data.username, mail: res.data.mail, id: res.data.id };
 						router.push("/");
 					} else if (res.status == 401) {
 						alert("Code " + err.response.status + " : Erreur :" + res.message);
