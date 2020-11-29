@@ -28,7 +28,7 @@
 							required
 						/>
 					</p>
-					<p><button type="button" v-on:click="login">S'inscrire</button></p>
+					<p><button type="button" v-on:click="login">Se connecter</button></p>
 				</form>
 			</div>
 		</div>

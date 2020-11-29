@@ -36,7 +36,7 @@
 							<div v-show="isConnected" class="nav-item">
 								<router-link to="/me" class="nav-item"><h2>{{ user.username }}</h2></router-link>
 							</div>
-							<router-link v-if="!isConnected" to="/register" class="nav-item"
+							<router-link v-show="!isConnected" to="/register" class="nav-item"
 								><h2>S'inscrire</h2></router-link
 							>
 						</li>
