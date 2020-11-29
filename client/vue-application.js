@@ -66,6 +66,23 @@ var app = new Vue({
 					console.log(err);
 				});
 		},
+		async addArticle(data) {
+			try {
+				await axios
+					.post("api/article", {
+						title: data.title,
+						content: data.content,
+						img: data.img,
+						author: this.user.username,
+					})
+					.then((res) => {
+						alert("Code " + res.status + ": Votre article a été publié !");
+					});
+			} catch (error) {
+				console.log(error);
+				alert("Code " + error.response.status + ": Une erreur est survenue.");
+			}
+		},
 	},
 });
 

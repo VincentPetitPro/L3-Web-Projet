@@ -19,6 +19,7 @@
 					:is-connected="isConnected"
 					@register="register"
 					@login="login"
+					@addarticle="addArticle"
 				></router-view>
 				<header>
 					<ul id="navbar">
@@ -32,12 +33,14 @@
 							<router-link to="/custom" class="nav-item"><h2>Custom Ta Paire</h2></router-link>
 						</li>
 						<li>
-							<div v-if="isConnected" class="nav-item"><h2>{{ user.username }}</h2></div>
+							<div v-show="isConnected" class="nav-item">
+								<router-link to="/me" class="nav-item"><h2>{{ user.username }}</h2></router-link>
+							</div>
 							<router-link v-if="!isConnected" to="/register" class="nav-item"
 								><h2>S'inscrire</h2></router-link
 							>
 						</li>
-						<li v-if="!isConnected">
+						<li v-show="!isConnected">
 							<router-link to="/login" class="nav-item"><h2>Se Connecter</h2></router-link>
 						</li>
 					</ul>

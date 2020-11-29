@@ -1,14 +1,18 @@
 <template>
 	<div id="page">
 		<div id="body">
-			<router-link to="/article" class="add-article">Ecrire un Article</router-link>
+			<router-link v-show="isConnected" to="/article" class="add-article"
+				>Ecrire un Article</router-link
+			>
 			<ul>
 				<li class="article" v-for="article in articles" v-bind:key="article.id">
-					<div>{{ article.title }} by {{ article.author }}</div>
-					<img :src="article.img" />
+					<h3>{{ article.title }}</h3>
+					<h4>by {{ article.author }}</h4>
+					<img :src="article.image" />
 					<div>{{ article.content }}</div>
 				</li>
 			</ul>
+			<div class="clear"></div>
 		</div>
 	</div>
 </template>
@@ -26,7 +30,7 @@ module.exports = {
 };
 </script>
 
-<style>
+<style scoped>
 #page {
 	width: 100%;
 	height: auto;
@@ -49,6 +53,7 @@ module.exports = {
 	align-items: center;
 }
 .add-article {
+	margin-top: 25px;
 	background-color: rgb(36, 36, 36);
 	border: 3px solid #f3ff85;
 	border-radius: 15px;
@@ -62,8 +67,14 @@ module.exports = {
 }
 
 ul {
+	margin-top: 25px;
 	list-style: none;
 	width: 90%;
+	list-style-position: inside;
+	overflow: auto;
+}
+li {
+	margin-bottom: 25px;
 }
 .article {
 	width: 90%;
@@ -77,5 +88,8 @@ ul {
 }
 img {
 	max-width: 70vw;
+}
+:is(h3, h4) {
+	margin: 5px;
 }
 </style>

@@ -93,14 +93,14 @@ router.get("/me", async (req, res) => {
 });
 
 router.post("/article", async (req, res) => {
-	const name = req.body.name;
+	const title = req.body.title;
 	const content = req.body.content;
 	const image = req.body.img;
 	const author = req.body.author;
 
 	if (
-		typeof name !== "string" ||
-		name === "" ||
+		typeof title !== "string" ||
+		title === "" ||
 		typeof content !== "string" ||
 		content === "" ||
 		typeof image !== "string" ||
@@ -113,14 +113,14 @@ router.post("/article", async (req, res) => {
 	}
 
 	const result = await client.query({
-		text: "INSERT INTO articles(name, content, image, author) VALUES ($1, $2, $3, $4) RETURNING *",
-		values: [name, content, image, author],
+		text: "INSERT INTO articles(title, content, image, author) VALUES ($1, $2, $3, $4) RETURNING *",
+		values: [title, content, image, author],
 	});
 	const id = result.rows[0].id;
 
 	res.json({
 		id: id,
-		name: name,
+		title: title,
 		content: content,
 		image: image,
 		author: author,
