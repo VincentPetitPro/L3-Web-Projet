@@ -1,7 +1,7 @@
 <template>
 	<div id="page">
 		<div id="body">
-			<div class="add-article">Ecrire Un Article</div>
+			<router-link to="/article" class="add-article">Ecrire un Article</router-link>
 			<ul>
 				<li class="article" v-for="article in articles" v-bind:key="article.id">
 					<div>{{ article.title }} by {{ article.author }}</div>
@@ -53,7 +53,14 @@ module.exports = {
 	border: 3px solid #f3ff85;
 	border-radius: 15px;
 	padding: 10px;
+	color: #f3ff85;
+	text-decoration: none;
 }
+.add-article:hover {
+	border: 3px solid #e6fb00;
+	color: #fcfdf1;
+}
+
 ul {
 	list-style: none;
 	width: 90%;

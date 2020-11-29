@@ -3,6 +3,7 @@ const Custom = window.httpVueLoader("./components/Custom.vue");
 const Register = window.httpVueLoader("./components/Register.vue");
 const Login = window.httpVueLoader("./components/Login.vue");
 const Articles = window.httpVueLoader("./components/Articles.vue");
+const AddArticle = window.httpVueLoader("./components/AddArticle.vue");
 
 const routes = [
 	{ path: "/", component: Home },
@@ -10,6 +11,7 @@ const routes = [
 	{ path: "/custom", component: Custom },
 	{ path: "/login", component: Login },
 	{ path: "/articles", component: Articles },
+	{ path: "/article", component: AddArticle },
 ];
 
 const router = new VueRouter({
@@ -23,7 +25,7 @@ var app = new Vue({
 		user: {},
 		isConnected: false,
 	},
-	components: { Home, Custom, Register, Login, Articles },
+	components: { Home, Custom, Register, Login, Articles, AddArticle },
 	methods: {
 		async register(data) {
 			try {
