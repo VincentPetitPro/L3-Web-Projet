@@ -1,7 +1,7 @@
 <template>
 	<div id="page">
 		<div id="body">
-			<router-link v-show="isConnected" to="/article" class="add-article"
+			<router-link v-if="this.isConnected" to="/article" class="add-article"
 				>Ecrire un Article</router-link
 			>
 			<ul>
@@ -51,6 +51,9 @@ module.exports = {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+::-webkit-scrollbar {
+	display: none;
 }
 .add-article {
 	margin-top: 25px;
